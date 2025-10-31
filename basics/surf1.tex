@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} % Recommended for current versions
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        title=3D Surface Plot with Grid,
+        xlabel=$x$,
+        ylabel=$y$,
+        zlabel=$z$,
+        grid=major, % Enables major grid lines
+        % Optional: Customize grid appearance
+        major grid style={gray,line width=0.5pt},
+        minor tick num=4, % Number of minor ticks between major ticks
+        minor grid style={lightgray,dotted},
+        view={30}{30}, % Sets the viewing angle (azimuth, elevation)
+        domain=-2:2, % x-domain
+        y domain=-2:2, % y-domain
+        samples=20, % Number of samples for the plot
+    ]
+        \addplot3[
+            surf, % Creates a surface plot
+            colormap/jet, % Sets the color map
+            % draw opacity=0.1,
+            % fill opacity=0.3,
+        ] {exp(-x^2 - y^2)}; % The function to plot
+    \end{axis}
+\end{tikzpicture}
+
+\end{document}

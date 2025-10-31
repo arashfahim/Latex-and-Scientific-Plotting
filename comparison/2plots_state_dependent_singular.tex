@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+
+\begin{filecontents*}{data.dat}
+x     invest no_invest
+0	1	1.00000000000000
+0.500000000000000	0.641784981426886	0.717195042263566
+1	0.468471737637512	0.580367042197416
+1.50000000000000	0.366081901758409	0.499531924441124
+2	0.298234544488540	0.445967534311239
+2.50000000000000	0.249785632554632	0.407717902717280
+3	0.213320336221151	0.378929141627600
+3.50000000000000	0.183606514919220	0.356399499432074
+4	0.158031591914579	0.338230509716258
+4.50000000000000	0.136019051688028	0.323224878800204
+5	0.117072682733658	0.310589830565146
+5.50000000000000	0.100765391850339	0.299779301281366
+6	0.0867295765131834	0.290404677171635
+\end{filecontents*}
+
+
+\begin{document}
+\pgfplotstableread{data.dat}{\data}
+\begin{tikzpicture}
+\begin{axis}[minor tick num=1,enlarge x limits=0, enlarge y limits=0, 
+xlabel=Initial wealth,ylabel=Ruin probability,xtick={2,4,6}]
+\addplot [dashed,red,very thick] table [x={x}, y={invest}] {\data};\addlegendentry{\tiny Investment in R\&D};
+\addplot [mark=*,blue,very thick] table [x={x}, y={no_invest}] {\data};\addlegendentry{\tiny No investment};
+\addplot [dashed,black] coordinates {(3,0) (3,0.213320336221151)};
+\end{axis}
+\node [below] at (3.5,.1) {$x^*$};
+\end{tikzpicture}
+\end{document}

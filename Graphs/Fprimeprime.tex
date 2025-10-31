@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+\usepackage{upgreek}
+\begin{document}
+\pgfplotstableread{plot_pa.dat}{\Fdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+       axis line style = ultra thick,
+       ylabel={\huge $V^{\prime\prime}(y)$},
+       xlabel={\huge $y$},
+       xtick={1.08},
+       xticklabels={{\huge $y_p$}},
+       % extra x ticks={0.2},
+       % extra x tick labels={{\huge $y_\star$}},
+       extra x tick style={
+       xticklabel style={yshift=0.5ex, anchor=south}},
+       ytick={-21.5,-19.5,-10,-8,-6.5,-3.33,0},
+       yticklabels={{\huge $\Upgamma_4$},{\huge $\Upgamma_\textrm{min}$},{\huge $\Upgamma_3$},{\huge $\zeta_{1}$},{\huge $\zeta_{3}=\zeta_{2}$},{\huge $\Upgamma_2$},{\huge $\Upgamma_1=0$}},
+       extra y ticks={0.},
+       extra y tick labels={{\huge $\Upgamma_1=0$}},
+       xmin=0,
+       ymin=-23,
+       xmax=1.2,
+       ymax=1.5,
+       width=10in,
+       height=6in,
+       axis lines=center,
+       x label style={at={(ticklabel cs:1)}},
+       y label style={at={(ticklabel cs:1.1)}},
+     ]
+\addplot [blue,ultra thick,restrict x to domain={0:1.08}] table [x={w}, y={ddF}] {\Fdata};
+
+\addplot [purple,ultra thick, dotted, domain=0:0.2](x,-19.5);
+% \addplot [purple,ultra thick, dotted, domain=-19.5:0](0.2,x);
+\addplot [purple,ultra thick, dotted, domain=0:.6251](x,-3.33);
+\addplot [purple,ultra thick, dotted, domain=0:.41](x,-10.);
+
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

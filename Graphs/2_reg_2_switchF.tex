@@ -1,0 +1,67 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+\usepackage{upgreek}
+\begin{document}
+\pgfplotstableread{plot_pa2b.dat}{\Fdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[ylabel={{\huge $F(w)$}},
+       xlabel={{\huge $w$}},
+       axis line style = ultra thick,
+       xtick={0,5.38},
+       ytick={0,10},
+       xticklabels={{\huge 0},{\huge $w_p$}},
+       xticklabel style={above},
+       extra x ticks={0.25,1},
+       extra x tick labels={{\huge $w_{1,2}$},{\huge $w_{1,2}$}},
+       yticklabels={{\huge  0},{\huge $\frac{\upmu}{r}$}},
+       xmin=-0.1,
+       ymin=-4,
+       xmax=7,
+       ymax=11,
+       width=5in,
+       height=5in,
+       axis lines=center,
+       xticklabel style={above,
+        every tick/.style={
+        black,
+        ultra thick,
+      }
+      },
+       extra x tick style={
+       tick label style ={yshift=-7mm,xshift=3mm},
+        tick align=outside,
+        dotted,
+        major tick length=5mm,
+        ultra thick
+       },
+             every axis y label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=south,
+},
+            every axis x label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=west,
+},
+     ]
+\addplot [blue,ultra thick] table [x={w}, y={F}] {\Fdata};
+\addplot [black,ultra thick] table [x={w}, y={L}] {\Fdata};
+\addplot [red, thick, dotted,domain=-0.78:0] (5.38,x);
+\addplot [red, thick, dotted,domain=0:0.4] (0.25,x);
+\addplot [red, thick, dotted,domain=0:1.3] (1,x);
+
+
+\addplot [red, ultra thick,domain=5.38:7] (x,-x+4.6);
+
+
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

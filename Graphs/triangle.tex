@@ -1,0 +1,59 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+\usepackage{upgreek}
+\begin{document}
+\pgfplotstableread{plot_pa2c.dat}{\Fdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[ylabel={{\huge $F(w)$}},
+       xlabel={{\huge $w$}},
+       axis line style = ultra thick,
+       xtick={0,3.97},
+       ytick={0,2.0644,10},
+       xticklabels={{\huge 0},{\huge $a$}},
+       x tick label style={below},
+       yticklabels={{\huge  0},{\huge $\frac{\upmu}{r}-a\frac{\gamma}{r}$},{\huge $\frac{\upmu}{r}$}},
+       extra x ticks={10},
+       extra x tick labels={{\huge $\frac{\upmu}{\gamma-r}$}},
+       extra x tick style={tick label style={yshift=1.2cm}},        
+       xmin=-0.1,
+       ymin=-12,
+       xmax=12,
+       ymax=12,
+       width=5in,
+       height=5in,
+       axis lines=center,
+        every tick/.style={
+        black,
+        thick,
+      },
+                   every axis y label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=south,
+},
+            every axis x label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=north,
+},
+     ]
+\addplot [blue,ultra thick, restrict x to domain=0:3.97] table [x={w}, y={F}] {\Fdata};%3.97
+\addplot [dashed,ultra thick,gray] table [x={w}, y={L}] {\Fdata};
+\addplot [gray, ultra thick,domain=0:10] (x,-x);
+\addplot [red, ultra thick, domain=0:3.97] (x,{0.52*3.97-x+3.97-0.06*(x-3.97)^2});
+\addplot [red, thick, dotted,domain=-10:0] (10,x);
+\addplot [red, thick, dotted,domain=0:2] (3.97,x);
+\addplot [red, thick, dotted,domain=0:3.97] (x,2.0644);
+\addplot [gray, thick, ultra thick,domain=0:3.97] (x,0.52*x);
+
+
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

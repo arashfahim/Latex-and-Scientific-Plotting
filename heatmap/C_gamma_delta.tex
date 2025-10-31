@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{pgfplots,tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xlabel={$\delta$}, ylabel={$\gamma$},ylabel style={rotate=-90}, grid=none, colormap/jet,colorbar,
+%point meta min=-40, point meta max=10, 
+ytick={2,4,6,8,9.9},
+colorbar style={
+/pgf/number format/precision=3,
+ytick={0,10}
+},
+view={0}{90}]
+\addplot3[surf,shader=flat]  file {c_gamma_delta.dat};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

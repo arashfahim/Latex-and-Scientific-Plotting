@@ -1,0 +1,74 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+\usepackage{upgreek}
+\usepackage{amsfonts,amssymb}
+\begin{document}
+\pgfplotstableread{s_V_s.dat}{\SVdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[ylabel={},
+       xlabel={{\huge $s$}},
+       axis line style = ultra thick,
+       table/col sep=comma,
+       ticks=none,
+       % xtick={0.3984,2.1782},
+       % ytick={0.09528,0.937},
+       % xticklabels={{},{}},
+       % xticklabel style={above},
+%       extra x ticks={0.25,1},
+%       extra x tick labels={{\huge $w_{1,2}$},{\huge $w_{1,2}$}},
+       yticklabels={{},{}},
+       xmin=0.3,
+       ymin=0.0,
+       xmax=5.5,
+       ymax=1.4,
+       width=5in,
+       height=3in,
+       axis lines=center,
+       xticklabel style={below,
+        every tick/.style={
+        black,
+        ultra thick,
+      }
+      },
+%       extra x tick style={
+%       tick label style ={yshift=-7mm,xshift=0mm},
+%        tick align=outside,
+%        dotted,
+%        major tick length=5mm,
+%        ultra thick
+%       },
+             every axis y label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=south,
+},
+            every axis x label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=west,
+},
+     ]
+\addplot [blue,ultra thick] table [x={S}, y={V(S)}] {\SVdata};
+\addplot [orange,ultra thick] table [x={S}, y={theta}] {\SVdata};
+\addlegendentry{{\huge $\mathcal{V}(s)$}}
+\addlegendentry{{\huge $\theta^*(s)$}}
+%\addplot [black,ultra thick] table [x={w}, y={L}] {\Fdata};
+% \addplot [red, thick, dashed,domain=0:0.3440866817912365] (1.68,x);
+% \addplot [red, thick, mark = *] (1.68,0.3440866817912365);
+% \addplot [red, thick, dotted,domain=0:1.3] (x,1.5-1.2*x);
+
+
+%\addplot [red, ultra thick,domain=5.38:7] (x,-x+4.6);
+
+
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

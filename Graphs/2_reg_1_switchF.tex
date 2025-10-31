@@ -1,0 +1,51 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+\usepackage{upgreek}
+\begin{document}
+\pgfplotstableread{plot_pa2a.dat}{\Fdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[ylabel={{\huge $F(w)$}},
+       xlabel={{\huge $w$}},
+       axis line style = ultra thick,
+       xtick={0,2.42},
+       ytick={0,4},
+       xticklabels={{\huge 0},{\huge $w_p$}},
+       xticklabel style={above},
+       yticklabels={{\huge  0},{\huge $\frac{\upmu}{r}$}},
+       xmin=-0.1,
+       ymin=-2.0,
+       xmax=5,
+       ymax=4.5,
+       width=5in,
+       height=5in,
+       axis lines=center,
+        every tick/.style={
+        black,
+        thick,
+      },
+                   every axis y label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=south,
+},
+            every axis x label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=west,
+},
+     ]
+\addplot [blue,ultra thick] table [x={w}, y={F}] {\Fdata};
+\addplot [black,ultra thick] table [x={w}, y={L}] {\Fdata};
+\addplot [red, thick, dotted,domain=-0.84:0] (2.42,x);
+\addplot [red, ultra thick,domain=2.42:5] (x,-x+1.58);
+
+\end{axis}
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+
+\begin{filecontents*}{data.dat}
+x    market_invest  C_invest No_invest
+0	1	1	1
+0.100000000000000	0.740927634712199	0.913931185271228	0.813970430735005
+0.200000000000000	0.548973759880213	0.835270211411272	0.662547862110929
+0.300000000000000	0.406749829427109	0.763379494336853	0.539294368704990
+0.400000000000000	0.301372189037018	0.697676326071031	0.438969669587763
+0.500000000000000	0.223294983191235	0.637628151621773	0.357308331033954
+0.600000000000000	0.165445423738982	0.582748252373990	0.290838416116913
+0.700000000000000	0.122583086484882	0.532591801006897	0.236733870840970
+0.800000000000000	0.0908251963249641	0.486752255959972	0.192694370817990
+0.900000000000000	0.0672948978853268	0.444858066222941	0.156847520014930
+1	0.0498606495183741	0.406569659740599	0.127669243426270
+\end{filecontents*}
+
+
+\begin{document}
+\pgfplotstableread{data.dat}{\data}
+\begin{tikzpicture}
+\begin{axis}[minor tick num=1,enlarge x limits=0, enlarge y limits=0, 
+xlabel=Initial wealth,ylabel=Ruin probability]
+\addplot [dashed,red,very thick] table [x={x}, y={market_invest}] {\data};\addlegendentry{\tiny R\&D and market index};
+\addplot [mark=triangle*,black,very thick] table [x={x}, y={No_invest}] {\data};\addlegendentry{\tiny R\&D only};
+\addplot [mark=*,blue,very thick] table [x={x}, y={C_invest}] {\data};\addlegendentry{\tiny No investment};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

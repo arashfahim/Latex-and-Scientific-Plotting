@@ -1,0 +1,72 @@
+\documentclass{standalone}
+\usepackage{filecontents,pgfplots}
+\usepackage{upgreek}
+\begin{document}
+\pgfplotstableread{plot_pa2b.dat}{\Fdata}
+\pgfplotsset{
+    standard/.style={
+        axis x line=middle,
+        axis y line=middle,
+        enlarge x limits=0.1,
+        enlarge y limits=0.1
+    }
+}
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+ylabel={\huge  $F^{\prime\prime}(w)$},
+xlabel={\huge  $w$},
+      axis line style = ultra thick,
+        xtick={5.38},
+        ytick={0,-0.8611},
+        xticklabels={{\huge  $w_p$}},
+        yticklabels={{\huge  $\Upgamma_1=0$},{\huge  $\Upgamma_2$}},
+        yticklabel style={yshift=-3mm},
+        extra y ticks={-0.75,-0.8333},
+        extra y tick labels={{\huge  $\upzeta_1$},{\huge  $\upzeta_2$}},
+        extra y tick style={% changes for all extra ticks
+        tick align=outside,
+        tick pos=left,
+        dotted,
+        major tick length=10mm,
+        tick style={black},
+        grid style={black},
+        ultra thick,
+        },
+        extra x ticks={0.25,1},
+        extra x tick labels={{\huge  $w_{1,2}$},{\huge  $w_{2,1}$}},
+       xmin=0,
+       ymin=-1,
+       xmax=6.5,
+       ymax=0.2,
+       width=5in,
+       height=5in,
+       axis lines=center,
+       xticklabel style={above,
+        yshift=1mm,
+        xshift=2mm,
+        every tick/.style={
+        black,
+        ultra thick,
+      }
+      },
+             every axis y label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=south,
+},
+            every axis x label/.style={
+       at={(ticklabel* cs:1)},
+      anchor=west,
+},
+     ]
+\addplot [blue,ultra thick] table [x={w}, y={ddF}] {\Fdata};
+
+\addplot [red,ultra thick, dashed] table [x={w}, y={gamma2}] {\Fdata};
+
+
+\addplot [red,ultra thick, dotted, domain=0:-0.8611] (1,x);
+\addplot [red,ultra thick, dotted, domain=0:-0.8611] (0.25,x);
+
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

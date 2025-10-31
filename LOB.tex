@@ -1,0 +1,66 @@
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=0.75]
+
+
+\filldraw [gray] (-5,0) rectangle (-4.5,2);
+\draw [-|]  (-4.25,0) -- (-4.25,1) node[right](-4.25,1) {$r_{k}\dots$} -- (-4.25,2);
+\draw [thick] (-4.75,-.1) -- (-4.75,.1);
+\node at (-4.75,-.35) {$b_{k}$};
+\node   at (-3.5,-.2) {$\dots$};
+
+
+\filldraw [gray] (-3,0) rectangle (-2.5,1.5);
+\draw [-|]  (-2.25,0) -- (-2.25,.75) node[right](-2.25,.75) {$r_{3}$} -- (-2.25,1.5);
+\draw [thick] (-2.75,-.1) -- (-2.75,.1);
+\node at (-2.75,-.35) {$b_{3}$};
+
+
+\filldraw [gray] (-1.5,0) rectangle (-1,2.2);
+\draw [-|]  (-.75,0) -- (-.75,1.1) node[right](-.75,1.1) {$r_{2}$} -- (-.75,2.2);
+\draw [thick] (-1.25,-.1) -- (-1.25,.1);
+\node at (-1.25,-.35) {$b_{2}$};
+
+
+\filldraw [gray] (0,0) rectangle (0.5,.8);
+\draw [-|]  (.75,0) -- (.75,.4) node[right](.75,.4) {$r_{1}$} -- (.75,.8);
+\draw [thick] (.25,-.1) -- (.25,.1);
+\node at (.25,-.35) {$b_{1}$};
+
+
+\draw  (2,0) rectangle (2.5,1);
+\draw [-|]  (2.75,0) -- (2.75,.5) node[right](2.75,.5) {$q_{1}$} -- (2.75,1);
+\draw [thick] (2.25,-.1) -- (2.25,.1);
+\node at (2.25,-.35) {$a_{1}$};
+
+
+\draw  (3.5,0) rectangle (4,2.2);
+\draw [-|]  (4.25,0) -- (4.25,1.1) node[right](4.25,1.1) {$q_{2}$} -- (4.25,2.2);
+\draw [thick] (3.75,-.1) -- (3.75,.1);
+\node at (3.75,-.35) {$a_{2}$};
+
+
+\draw  (5,0) rectangle (5.5,1.5);
+\draw [-|]  (5.75,0) -- (5.75,.75) node[right](5.75,.75) {$q_{3}\dots$} -- (5.75,1.5);
+\draw [thick] (5.25,-.1) -- (5.25,.1);
+\node at (5.25,-.35) {$a_{3}$};
+\node   at (6.35,-.2) {$\dots$};
+
+
+\draw  (7,0) rectangle (7.5,2);
+\draw [-|]  (7.75,0) -- (7.75,1) node[right](7.75,1) {$q_{\ell}$} -- (7.75,2);
+\draw [thick] (7.25,-.1) -- (7.25,.1);
+\node at (7.25,-.35) {$a_{\ell}$};
+
+
+\draw [|-|]  (.25,-.7) -- (2.25,-.7);
+\node   at (1.25,-1) {bid-ask spread};
+\draw [thick,->]  (-5.2,0) -- (8,0) node[anchor=north west] {Price};
+\draw [thick,->]  (-5.2,0) -- (-5.2,3)node[rotate=90,anchor=south east] {Volume};
+\end{tikzpicture}
+
+
+\end{document}
